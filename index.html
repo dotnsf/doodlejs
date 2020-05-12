@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<title>Sample for Doodle JS</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="./doodle.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta name="apple-mobile-web-app-title" content="Doodle JS"/>
+
+<style type="text/css">
+html, body{
+  text-align: center;
+  background-color: #fafafa;
+  font-size: 20px;
+  color: #333;
+}
+#mycanvas{
+  border: 1px solid #333;
+}
+#myimg{
+  position: absolute;
+  top: -2000px;
+}
+</style>
+
+<script>
+$( function(){
+  $('#cdiv').doodlejs({
+    select_color: 'select_color',
+    select_linewidth: 'select_linewidth',
+    undo_btn: 'undo_btn',
+    redo_btn: 'redo_btn',
+    setbg_btn: 'setbg_btn'
+  });
+});
+</script>
+</head>
+<body>
+
+<select id="select_color" name="select_color">
+  <option style="color:black;" value="transparent">透明</option>
+  <option style="color:black;" value="black" selected="selected">黒</option>
+  <option style="color:lightgray;" value="white">白</option>
+  <option style="color:red;" value="red">赤</option>
+  <option style="color:blue;" value="blue">青</option>
+  <option style="color:green;" value="green">緑</option>
+  <option style="color:yellow;" value="yellow">黃色</option>
+  <option style="color:cyan;" value="cyan">水色</option>
+  <option style="color:magenta;" value="magenta">紫</option>
+  <option style="color:gray;" value="gray">グレー</option>
+  <option style="color:#ef8f9c;" value="#ef8f9c">ピンク</option>
+  <option style="color:#ead2ad;" value="#ead2ad">肌</option>
+  <option style="color:#7c6035;" value="#7c6035">茶</option>
+</select>
+
+<select id="select_linewidth" name="select_linewidth">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5" selected="selected">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+  <option value="13">13</option>
+  <option value="14">14</option>
+  <option value="15">15</option>
+</select>
+
+<input type="button" class="btn btn-xs btn-secondary p-0" id="setbg_btn" value="背景" onClick="setBG();"/>
+
+<div id="canvas_div">
+  <div id="cdiv"></div>
+
+  <input type="button" class="btn btn-xs" id="undo_btn" value="<" onClick="undo();" disabled="disabled"/>
+  <input type="button" class="btn btn-xs btn-warning" value="リセット" onClick="resetCanvas();"/>
+  <input type="button" class="btn btn-xs" id="redo_btn" value=">" onClick="redo();" disabled="disabled"/>
+</div>
+
+</body>
+</html>
