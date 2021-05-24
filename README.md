@@ -51,7 +51,7 @@ $('#cdiv').doodlejs({
   setbg_btn: 'setbg_btn'
 });
 
-ID value('#cdiv') is the ones of &lt;div&gt; above(1).
+ID value('#cdiv') is the ones of <div> above(1).
 ```
 
 
@@ -62,5 +62,5 @@ This code is licensed under MIT.
 
 ## Copyright
 
-2020 K.Kimura @ Juge.Me all rights reserved.
+2020-2021 K.Kimura @ Juge.Me all rights reserved.
 
