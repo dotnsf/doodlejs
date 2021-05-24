@@ -7,6 +7,8 @@ JavaScript library for hand-drawn doodle sharing services.
 
 ## How to use
 
+(See sample [index.html](https://github.com/dotnsf/doodlejs/blob/master/docs/index.html) for your reference.)
+
 1. Code &lt;div&gt; element with **id** :
 
 `<div id="cdiv"></div>`
@@ -53,6 +55,44 @@ $('#cdiv').doodlejs({
 
 ID value('#cdiv') is the ones of <div> above(1).
 ```
+
+
+4. (Option)Customize `DOODLEJS.prototype.postCanvas()` function, as send button handler if needed :
+
+```
+DOODLEJS.prototype.postCanvas = function( png ){
+  //. バイナリ変換
+  var bin = atob( png );
+  var buffer = new Uint8Array( bin.length );
+  for( var i = 0; i < bin.length; i ++ ){
+    buffer[i] = bin.charCodeAt( i );
+  }
+  var blob = new Blob( [buffer.buffer], {
+    type: 'image/png'
+  });
+
+  //. フォームにして送信
+  var formData = new FormData();
+  formData.append( 'image', blob );
+  formData.append( 'timestamp', ( new Date() ).getTime() );
+
+  $.ajax({
+    type: 'POST',
+    url: '/image',
+    data: formData,
+    contentType: false,
+    processData: false,
+    success: function( data, dataType ){
+      console.log( data );
+    },
+    error: function( jqXHR, textStatus, errorThrown ){
+      console.log( textStatus + ': ' + errorThrown );
+    }
+  });
+};
+```
+
+You need to implement `POST /image` backend API handler in this case.
 
 
 ## Licensing
