@@ -34,6 +34,17 @@ $.fn.doodlejs = function( option ){
 function init(){
   THIS.html( '<canvas width="80%" height="50%" id="mycanvas"></canvas>' );
 
+  //. CSS after <canvas> creation
+  $('html').css( 'text-align', 'center' );
+  $('html').css( 'background-color', '#fafafa' );
+  $('html').css( 'font-size', '20px' );
+  $('html').css( 'color', '#333' );
+  $('body').css( 'text-align', 'center' );
+  $('body').css( 'background-color', '#fafafa' );
+  $('body').css( 'font-size', '20px' );
+  $('body').css( 'color', '#333' );
+  $('#mycanvas').css( 'border', '1px solid #333' );
+
   var canvas = document.getElementById( 'mycanvas' );
   if( !canvas || !canvas.getContext ){
     return false;
