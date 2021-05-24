@@ -439,3 +439,54 @@ function timestamp2datetime( ts ){
     return "";
   }
 }
+
+function sendCanvas(){
+  var canvas = document.getElementById( 'mycanvas' );
+  if( !canvas || !canvas.getContext ){
+    return false;
+  }
+  var ctx = canvas.getContext( '2d' );
+
+  //. 画像データ
+  var png = canvas.toDataURL( 'image/png' );
+  png = png.replace( /^.*,/, '' );
+
+  postCanvas( png );
+}
+
+//. ここをカスタマイズ可能にしたい
+function postCanvas( png ){
+  console.log( 'png', png );
+  /*
+  //. バイナリ変換
+  var bin = atob( png );
+  var buffer = new Uint8Array( bin.length );
+  for( var i = 0; i < bin.length; i ++ ){
+    buffer[i] = bin.charCodeAt( i );
+  }
+  var blob = new Blob( [buffer.buffer], {
+    type: 'image/png'
+  });
+
+  //. フォームにして送信
+  console.log( 'Sending data... : ' + blob.size );
+  var formData = new FormData();
+  formData.append( 'image', blob );    //. <form enctype='multipart/formdata'><input name='image' type='file'/> ...
+  formData.append( 'uuid', uuid );
+  formData.append( 'timestamp', ( new Date() ).getTime() );
+
+  $.ajax({
+    type: 'POST',
+    url: '/image',
+    data: formData,
+    contentType: false,
+    processData: false,
+    success: function( data, dataType ){
+      console.log( data );
+    },
+    error: function( jqXHR, textStatus, errorThrown ){
+      console.log( textStatus + ': ' + errorThrown );
+    }
+  });
+  */
+}
