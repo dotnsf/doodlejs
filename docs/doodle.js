@@ -451,11 +451,15 @@ function sendCanvas(){
   var png = canvas.toDataURL( 'image/png' );
   png = png.replace( /^.*,/, '' );
 
-  postCanvas( png );
+  var obj = new DOODLEJS();
+  obj.postCanvas( png );
 }
 
 //. ここをカスタマイズ可能にしたい
-function postCanvas( png ){
+var DOODLEJS = function(){};
+DOODLEJS.prototype.postCanvas = function( png ){
+
+//function postCanvas( png ){
   console.log( 'png', png );
   /*
   //. バイナリ変換
@@ -489,4 +493,4 @@ function postCanvas( png ){
     }
   });
   */
-}
+};
