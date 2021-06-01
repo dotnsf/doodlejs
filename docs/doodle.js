@@ -301,13 +301,15 @@ function resized(){
 }
 
 function resetCanvas( no_reset_unredo ){
-  init();
-  resized();
+  if( confirm( 'キャンバスをリセットしますか？' ) ){
+    init();
+    resized();
 
-  if( !no_reset_unredo ){
-    undos = [];
-    redos = [];
-    backgroundcolor = null;
+    if( !no_reset_unredo ){
+      undos = [];
+      redos = [];
+      backgroundcolor = null;
+    }
   }
 }
 
