@@ -72,6 +72,7 @@ DOODLEJS.prototype.postCanvas = function( png ){
   <option style="color:blue;" value="blue">青</option>
   <option style="color:green;" value="green">緑</option>
   <option style="color:yellow;" value="yellow">黃色</option>
+  <option style="color:#FFA500;" value="#FFA500">橙</option>
   <option style="color:cyan;" value="cyan">水色</option>
   <option style="color:magenta;" value="magenta">紫</option>
   <option style="color:gray;" value="gray">グレー</option>
@@ -98,7 +99,20 @@ DOODLEJS.prototype.postCanvas = function( png ){
   <option value="15">15</option>
 </select>
 
+<!-- https://getbootstrap.jp/docs/4.2/components/buttons/
 <input type="button" class="btn btn-xs btn-secondary p-0" id="setbg_btn" value="背景" onClick="setBG();"/>
+-->
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-xs btn-secondary p-0 active">
+    <input type="radio" name="options" class="color_toggle_buttons" id="option1" autocomplete="off" checked/>線
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" class="color_toggle_buttons" id="option2" autocomplete="off"/>影
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" class="color_toggle_buttons" id="option3" autocomplete="off"/>背景
+  </label>
+</div>
 
 <div id="canvas_div">
   <div id="cdiv"></div>
