@@ -36,6 +36,14 @@ JavaScript library for hand-drawn doodle sharing services.
 
   - Set Background color button
 
+- &lt;div id="colorModal"&gt;
+
+  - Color Modal Dialog
+
+- &lt;input type="color" id="color-picker"&gt;
+
+  - Color Picker
+
 
 * &lt;select&gt;s can be &lt;input&gt; which can set/get values with **.val()** method.
 

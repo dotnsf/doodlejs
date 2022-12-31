@@ -10,6 +10,8 @@ var redos = [];
 var stroke = null; //. { color: color, width: width, xys: [] }
 var backgroundcolor = null;
 
+var custom_color = '#000000';
+
 $.fn.doodlejs = function( option ){
   //. this = $('#cdiv')
   THIS = this;
@@ -69,6 +71,9 @@ function init(){
     //. isDrawがtrueのとき描画
     if( mouse.isDrawing ){
       var color = $('#'+OPTION.select_color).val();
+      if( color == 'custom' ){
+        color = custom_color;
+      }
       if( color == 'transparent' ){
         ctx.globalCompositeOperation = 'destination-out';
       }else{
@@ -100,6 +105,9 @@ function init(){
 
     stroke = {};
     stroke.color = $('#'+OPTION.select_color).val();
+    if( stroke.color == 'custom' ){
+      stroke.color = custom_color;
+    }
     stroke.width = parseInt( $('#'+OPTION.select_linewidth).val() );
     stroke.xys = [ [ mouse.x, mouse.y ] ];
   });
@@ -139,6 +147,9 @@ function init(){
     //. isDrawがtrueのとき描画
     if( mouse.isDrawing ){
       var color = $('#'+OPTION.select_color).val();
+      if( color == 'custom' ){
+        color = custom_color;
+      }
       if( color == 'transparent' ){
         ctx.globalCompositeOperation = 'destination-out';
       }else{
@@ -172,6 +183,9 @@ function init(){
 
     stroke = {};
     stroke.color = $('#'+OPTION.select_color).val();
+    if( stroke.color == 'custom' ){
+      stroke.color = custom_color;
+    }
     stroke.width = parseInt( $('#'+OPTION.select_linewidth).val() );
     stroke.xys = [ [ mouse.startX, mouse.startY ] ];
   });
@@ -212,6 +226,9 @@ function init(){
     //. isDrawがtrueのとき描画
     if( mouse.isDrawing ){
       var color = $('#'+OPTION.select_color).val();
+      if( color == 'custom' ){
+        color = custom_color;
+      }
       if( color == 'transparent' ){
         ctx.globalCompositeOperation = 'destination-out';
       }else{
@@ -245,6 +262,9 @@ function init(){
 
     stroke = {};
     stroke.color = $('#'+OPTION.select_color).val();
+    if( stroke.color == 'custom' ){
+      stroke.color = custom_color;
+    }
     stroke.width = parseInt( $('#'+OPTION.select_linewidth).val() );
     stroke.xys = [ [ mouse.startX, mouse.startY ] ];
   });
@@ -263,14 +283,18 @@ function init(){
 
   $('#'+OPTION.select_color).change( function(){
     var color = $(this).val();
-    if( color == 'white' ){
-      color = 'lightgray';
-    }else if( color == 'transparent' ){
-      color = 'black';
+    if( color == 'custom' ){
+      openColorModal();
+    }else{
+      if( color == 'white' ){
+        color = 'lightgray';
+      }else if( color == 'transparent' ){
+        color = 'black';
+      }
+      $(this).css( { 'color': color } );
+      $('#'+OPTION.select_linewidth).css( { 'color': color } );
+      $('#'+OPTION.setbg_btn).css( { 'background': color } );
     }
-    $(this).css( { 'color': color } );
-    $('#'+OPTION.select_linewidth).css( { 'color': color } );
-    $('#'+OPTION.setbg_btn).css( { 'background': color } );
   });
 
   //. リサイズ時に Canvas サイズを変更する
@@ -301,7 +325,7 @@ function resized(){
 }
 
 function resetCanvas( no_reset_unredo ){
-  if( confirm( 'キャンバスをリセットしますか？' ) ){
+  //if( confirm( 'キャンバスをリセットしますか？' ) ){
     init();
     resized();
 
@@ -310,7 +334,7 @@ function resetCanvas( no_reset_unredo ){
       redos = [];
       backgroundcolor = null;
     }
-  }
+  //}
 }
 
 function isAndroid(){
@@ -346,6 +370,9 @@ function redo(){
 function setBG(){
   var color = $('#'+OPTION.select_color).val();
   if( color ){
+    if( color == 'custom' ){
+      color = custom_color;
+    }
     if( color != 'transparent' ){
       backgroundcolor = color;
     }else{
@@ -462,3 +489,23 @@ var DOODLEJS = function(){};
 DOODLEJS.prototype.postCanvas = function( png ){
   console.log( 'png', png );
 };
+
+//. #33
+function changeColor( c ){
+  $('#'+OPTION.select_color).css( 'color', c );
+  $('#'+OPTION.select_color).val( 'custom' );
+  custom_color = c;
+
+  $('#'+OPTION.select_linewidth).css( { 'color': c } );
+  $('#'+OPTION.setbg_btn).css( { 'background': c } );
+}
+
+function openColorModal(){
+  $('#'+OPTION.colorModal).modal( 'show' );
+}
+
+function closeColorModal(){
+  $('#'+OPTION.colorModal).modal( 'hide' );
+  var c = $('#'+OPTION['color-picker']).val();
+  changeColor( c );
+}

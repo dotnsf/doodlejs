@@ -21,7 +21,9 @@ $( function(){
     select_linewidth: 'select_linewidth',
     undo_btn: 'undo_btn',
     redo_btn: 'redo_btn',
-    setbg_btn: 'setbg_btn'
+    setbg_btn: 'setbg_btn',
+    colorModal: 'colorModal',
+    "color-picker": 'color-picker'
   });
 });
 
@@ -79,6 +81,7 @@ DOODLEJS.prototype.postCanvas = function( png ){
   <option style="color:#ef8f9c;" value="#ef8f9c">ピンク</option>
   <option style="color:#ead2ad;" value="#ead2ad">肌</option>
   <option style="color:#7c6035;" value="#7c6035">茶</option>
+  <option style="color:black;" value="custom">カスタム</option>
 </select>
 
 <select id="select_linewidth" name="select_linewidth">
@@ -97,11 +100,15 @@ DOODLEJS.prototype.postCanvas = function( png ){
   <option value="13">13</option>
   <option value="14">14</option>
   <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
+  <option value="18">18</option>
+  <option value="19">19</option>
+  <option value="20">20</option>
 </select>
 
-<!-- https://getbootstrap.jp/docs/4.2/components/buttons/
 <input type="button" class="btn btn-xs btn-secondary p-0" id="setbg_btn" value="背景" onClick="setBG();"/>
--->
+<!-- https://getbootstrap.jp/docs/4.2/components/buttons/
 <div class="btn-group btn-group-toggle" data-toggle="buttons">
   <label class="btn btn-xs btn-secondary p-0 active">
     <input type="radio" name="options" class="color_toggle_buttons" id="option1" autocomplete="off" checked/>線
@@ -113,6 +120,7 @@ DOODLEJS.prototype.postCanvas = function( png ){
     <input type="radio" name="options" class="color_toggle_buttons" id="option3" autocomplete="off"/>背景
   </label>
 </div>
+-->
 
 <div id="canvas_div">
   <div id="cdiv"></div>
@@ -121,6 +129,25 @@ DOODLEJS.prototype.postCanvas = function( png ){
   <input type="button" class="btn btn-xs btn-warning" value="リセット" onClick="resetCanvas();"/>
   <input type="button" class="btn btn-xs btn-primary" value="送信" onClick="sendCanvas();"/>
   <input type="button" class="btn btn-xs" id="redo_btn" value=">" onClick="redo();" disabled="disabled"/>
+</div>
+
+<div class="modal bd-example-modal-lg fade" id="colorModal" tabindex="-1" role="dialog" aria-labbelledby="colorModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="colorModalLabel">色選択</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="colormodal-body">
+        <input type="color" class="form-control" id="color-picker" value="#000000"/>
+      </div>
+      <div class="modal-footer btn-center">
+        <button type="button" class="btn" data-toggle="modal" onClick="closeColorModal();">OK</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 </body>
